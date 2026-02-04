@@ -10,8 +10,8 @@ const Navbar = () => {
           to={link.path}
           className={({ isActive }) =>
             isActive
-              ? "text-blue-500 font-bold text-2xl hover:text-blue-300"
-              : "text-white font-bold text-2xl hover:text-blue-300"
+              ? "text-blue-500 font-bold text-2xl hover:text-blue-200 cursor-pointer"
+              : "text-white font-bold text-2xl hover:text-blue-200 cursor-pointer"
           } 
         >
           {link.title}

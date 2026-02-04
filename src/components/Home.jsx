@@ -38,8 +38,8 @@ const Home = () => {
   const resetPaste = () => {
     setTitle("");
     setValue("");
-    setSearchParams({});
-    // navigate("/");
+    setSearchParams({}); // Remove pasteId from URL and navigate to home
+  
   };
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const Home = () => {
 
 
   return (
-    <div className="w-full h-full py-10 max-w-[1200px] mx-auto px-5 lg:px-0">
+    <div className="w-full h-full max-w-[1100px] mx-auto my-10 ">
       <div className="flex flex-col gap-y-5 items-start">
         <div className="w-full flex flex-row gap-x-4 justify-between items-center">
           <input
@@ -70,7 +70,7 @@ const Home = () => {
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700"
             onClick={createPaste}
           >
-            {pasteId ? "Update Paste" : "Create My Paste"}
+            {pasteId ? "Update Paste" : "Create Paste"}
           </button>
 
           {pasteId && <button
@@ -82,7 +82,7 @@ const Home = () => {
         </div>
 
         <div
-          className={`w-full flex flex-col items-start relative rounded bg-opacity-10 border border-[rgba(128,121,121,0.3)] backdrop-blur-2xl`}
+          className={`w-full flex flex-col items-start relative rounded bg-opacity-10 border border-[rgba(128,121,121,0.5)] backdrop-blur-2xl`}
         >
           <div
             className={`w-full rounded-t flex items-center justify-between gap-x-4 px-4 py-2 border-b border-[rgba(128,121,121,0.3)]`}
@@ -105,6 +105,12 @@ const Home = () => {
                 className={`flex justify-center items-center  transition-all duration-300 ease-in-out group`}
                 onClick={() => {
                   navigator.clipboard.writeText(value);
+                  if (!value) {
+                    toast.error("Nothing to copy", {
+                      position: "top-right",
+                    });
+                    return;
+                  }
                   toast.success("Copied to Clipboard", {
                     position: "top-right",
                   });
